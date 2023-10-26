@@ -29,4 +29,13 @@ public class GameService {
     private int getRandomNumber() {
         return Randoms.pickNumberInRange(START, END);
     }
+
+    public void play() {
+        for (Car car : game.getCars()) {
+            if(MOVE_FORWARD_CONDITION <= getRandomNumber()){
+                car.moveForward(1); //자동차를 1칸 올리고
+            }
+            game.addTrialnum(); //게임 시도 횟수를 1회 올린다.
+        }
+    }
 }

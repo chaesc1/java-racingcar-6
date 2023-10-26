@@ -15,16 +15,34 @@ public class Controller {
     private Parser parser = new Parser();
 
     public void run() {
-        //Input 받아야해
-        InputView.requsetCarNameMessage();
-        List<String> carnames = parser.parseCarName(Console.readLine());
-        InputView.requestTrialNumMessage();
-        List<Car> cars = getCars(carnames);
-        int trial = parser.parsingNumberOfTrial(Console.readLine());
-        gameService = new GameService(trial, cars);
+        List<Car> cars = settingInit();
         List<Car> winners = gameService.play();
+        printResults(cars, winners);
+    }
+
+    private List<Car> settingInit() {
+        List<Car> cars = getCarsUserInput();
+        int trial = getUserTrialInput();
+        gameService = new GameService(trial, cars);
+        return cars;
+    }
+
+    private void printResults(List<Car> cars, List<Car> winners) {
         outputView.printResults(cars);
         outputView.printWinners(winners);
+    }
+
+    private int getUserTrialInput() {
+        InputView.requestTrialNumMessage();
+        int trial = parser.parsingNumberOfTrial(Console.readLine());
+        return trial;
+    }
+
+    private List<Car> getCarsUserInput() {
+        InputView.requsetCarNameMessage();
+        List<String> carnames = parser.parseCarName(Console.readLine());
+        List<Car> cars = getCars(carnames);
+        return cars;
     }
 
     private List<Car> getCars(List<String> carNames) {

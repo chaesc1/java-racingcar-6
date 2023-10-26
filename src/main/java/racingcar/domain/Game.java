@@ -6,7 +6,8 @@ public class Game {
     private final int trial;
     private final List<Car> cars;
     private int trialSum = 0;
-    public Game(List<Car> cars, int trial) {
+
+    public Game(int trial, List<Car> cars) {
         this.trial = trial;
         this.cars = cars;
     }
